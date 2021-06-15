@@ -32,6 +32,9 @@ export interface ParallaxProps {
      */
     y?: Array<string | number>;
     /**
+     */
+    scale?: Array<number>;
+    /**
      * Optionally pass additional class names to be added to the outermost parallax element.
      */
     className?: string;
