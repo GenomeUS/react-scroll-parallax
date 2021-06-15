@@ -10,6 +10,7 @@ class Parallax extends Component {
         tagOuter: 'div',
         x: [0, 0],
         y: [0, 0],
+        scale: [1, 1],
     };
 
     static propTypes = {
@@ -21,6 +22,9 @@ class Parallax extends Component {
         styleOuter: PropTypes.object,
         tagInner: PropTypes.string.isRequired,
         tagOuter: PropTypes.string.isRequired,
+        scale: PropTypes.arrayOf(
+            PropTypes.oneOfType([PropTypes.number])
+        ),
         x: PropTypes.arrayOf(
             PropTypes.oneOfType([PropTypes.string, PropTypes.number])
         ),
@@ -50,7 +54,9 @@ class Parallax extends Component {
             this.props.x[0] !== prevProps.x[0] ||
             this.props.x[1] !== prevProps.x[1] ||
             this.props.y[0] !== prevProps.y[0] ||
-            this.props.y[1] !== prevProps.y[1]
+            this.props.y[1] !== prevProps.y[1] ||
+            this.props.scale[0] !== prevProps.scale[0] ||
+            this.props.scale[1] !== prevProps.scale[1]
         ) {
             this.controller.updateElementPropsById(
                 this.element.id,
@@ -68,6 +74,7 @@ class Parallax extends Component {
     }
 
     _getElementOptions() {
+        console.log({props: this.props})
         return {
             elInner: this._inner,
             elOuter: this._outer,
@@ -77,6 +84,8 @@ class Parallax extends Component {
                 x1: this.props.x[1],
                 y0: this.props.y[0],
                 y1: this.props.y[1],
+                scale0: this.props.scale[0],
+                scale1: this.props.scale[1],
             },
         };
     }

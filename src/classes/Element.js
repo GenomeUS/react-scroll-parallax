@@ -8,6 +8,7 @@ import {
 import { VERTICAL } from '../constants';
 import Bounds from './Bounds';
 import Rect from './Rect';
+import getScaling from '../helpers/getScaling';
 
 export class Element {
     constructor(options) {
@@ -17,6 +18,7 @@ export class Element {
         this.scrollAxis = options.scrollAxis;
         this.id = createId();
         this.offsets = getOffsets(this.props);
+        this.scaling = getScaling(this.props);
         this.isInView = null;
         this.percent = 0;
 
@@ -55,7 +57,7 @@ export class Element {
             scroll.x
         );
 
-        setParallaxStyles(this.elInner, this.offsets, this.percent);
+        setParallaxStyles(this.elInner, this.offsets, this.scaling, this.percent);
 
         return this;
     }
@@ -77,7 +79,7 @@ export class Element {
             scroll.y
         );
 
-        setParallaxStyles(this.elInner, this.offsets, this.percent);
+        setParallaxStyles(this.elInner, this.offsets, this.scaling, this.percent);
 
         return this;
     }
